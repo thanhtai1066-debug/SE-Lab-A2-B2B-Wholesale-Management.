@@ -1,0 +1,19 @@
+# Standard Visual Studio/.NET generated output
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+TestResults/
+coverage/
+# Do not commit real credentials
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/secrets.json
+.env
+*.pfx
+*.cer
+*.key
+# OS files
+.DS_Store
+Thumbs.db

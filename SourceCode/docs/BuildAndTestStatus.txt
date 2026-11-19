@@ -1,0 +1,31 @@
+BUILD AND TEST STATUS - READ BEFORE SUBMISSION
+
+Prepared: ASP.NET Core 8 MVC project, WinForms net8.0-windows project,
+EF Core Data and shared business rules, SQL Server schema+seed script,
+xUnit tests (13 cases defined), demo accounts, README, report and git/video guidance.
+
+Verified by static checks (not by running .NET):
+- Five C# project files are valid XML and present in the Visual Studio solution.
+- JSON application and launch settings are well-formed.
+- App.config is well-formed XML.
+- Standalone SQL script contains 20 Items, 20 Agents, 20 Orders,
+  28 OrderDetails and 20 Users.
+- All 20 SQL demo password hashes are structurally valid PBKDF2 V3 and match
+  the documented local demo password.
+- Project source and report were generated and document pages were rendered
+  for visual formatting review.
+
+NOT VERIFIED because this environment does not have dotnet, Windows Forms,
+SQL Server LocalDB, Visual Studio, or an accessible GUI browser:
+- Actual NuGet restore and C# compilation
+- WinForms/Web runtime screens and PDF export
+- SQL Server transactional behavior in live execution
+- xUnit test run and pass percentage
+- Real GitHub branch/PR history and video
+
+To verify on Windows: dotnet restore B2BWholesaleManagement.sln
+                      dotnet build B2BWholesaleManagement.sln
+                      dotnet test B2BWholesaleManagement.sln
+Then run both apps, check reports and capture the true test output.
+
+Do not submit placeholders or claim all tests pass until the programs run.
