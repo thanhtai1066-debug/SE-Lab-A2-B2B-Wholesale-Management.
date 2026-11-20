@@ -1,0 +1,12 @@
+@model SalesOrder
+@{ ViewData["Title"] = "Invoice " + Model.OrderId; }
+<div class="no-print heading-row"><h1>Printable invoice</h1><div><a asp-action="Mine" class="btn btn-outline-secondary">Back to My Orders</a> <button onclick="window.print()" class="btn btn-primary">Print / Save as PDF</button></div></div>
+<article class="invoice panel">
+  <div class="invoice-head"><div><h1>WHOLESALE INVOICE</h1><p class="muted">Agent wholesale order management</p></div><div class="right"><strong>ORDER #@Model.OrderId</strong><br />Date (UTC): @Model.OrderDate.ToString("yyyy-MM-dd HH:mm")<br />Status: @Model.OrderStatus</div></div>
+  <hr />
+  <h2>Bill to</h2><p><strong>@Model.Agent.AgentName</strong><br />@Model.Agent.Address<br />@Model.Agent.Phone</p>
+  <table class="table"><thead><tr><th>Item</th><th>Pack</th><th class="right">Quantity</th><th class="right">Unit price</th><th class="right">Amount (VND)</th></tr></thead>
+  <tbody>@foreach(var d in Model.Details){<tr><td>@d.Item.ItemName</td><td>@d.Item.Size</td><td class="right">@d.Quantity</td><td class="right">@d.UnitAmount.ToString("N0")</td><td class="right">@((d.Quantity * d.UnitAmount).ToString("N0"))</td></tr>}</tbody>
+  <tfoot><tr><th colspan="4" class="right">TOTAL</th><th class="right">@Model.Details.Sum(d=>d.Quantity*d.UnitAmount).ToString("N0") VND</th></tr></tfoot></table>
+  <p class="muted"><small>Generated from the authenticated agent account. This is a demo invoice, not a tax invoice.</small></p>
+</article>

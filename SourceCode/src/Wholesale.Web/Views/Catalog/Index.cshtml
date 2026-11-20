@@ -1,0 +1,17 @@
+@model IEnumerable<Item>
+@{ ViewData["Title"] = "Product Catalog"; }
+<div class="heading-row">
+  <div><h1>Wholesale product catalog</h1><p class="muted">Up-to-date stock and unit pricing from the shared SQL Server database.</p></div>
+  <a class="btn btn-primary" asp-controller="Orders" asp-action="Create">Create bulk order</a>
+</div>
+<div class="table-responsive panel">
+<table class="table table-striped table-hover">
+  <thead><tr><th>Item ID</th><th>Item</th><th>Pack / size</th><th class="right">Unit price (VND)</th><th class="right">Available stock</th></tr></thead>
+  <tbody>
+  @foreach (var p in Model)
+  {
+    <tr><td>@p.ItemId</td><td><strong>@p.ItemName</strong></td><td>@p.Size</td><td class="right">@p.Price.ToString("N0")</td><td class="right">@if(p.StockQuantity < 10){<span class="tag tag-warning">Low: @p.StockQuantity</span>}else{<span class="tag">@p.StockQuantity</span>}</td></tr>
+  }
+  </tbody>
+</table>
+</div>
