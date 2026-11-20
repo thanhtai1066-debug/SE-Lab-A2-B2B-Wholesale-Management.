@@ -1,0 +1,12 @@
+@model IEnumerable<SalesOrder>
+@{ ViewData["Title"] = "My Orders"; }
+<div class="heading-row"><div><h1>My Orders</h1><p class="muted">Only orders from your signed-in agent account are visible.</p></div><a asp-action="Create" class="btn btn-primary">New order</a></div>
+<div class="table-responsive panel">
+<table class="table table-striped align-middle"><thead><tr><th>Order #</th><th>Date (UTC)</th><th>Status</th><th class="right">Lines</th><th class="right">Total (VND)</th><th>Invoice</th></tr></thead><tbody>
+@foreach(var o in Model)
+{
+<tr><td>#@o.OrderId</td><td>@o.OrderDate.ToString("yyyy-MM-dd HH:mm")</td><td><span class="tag">@o.OrderStatus</span></td><td class="right">@o.Details.Count</td><td class="right">@o.Details.Sum(d => d.Quantity * d.UnitAmount).ToString("N0")</td><td><a asp-action="Invoice" asp-route-id="@o.OrderId">View / print</a></td></tr>
+}
+</tbody></table>
+@if(!Model.Any()) { <p class="muted">No orders yet. Create your first order.</p> }
+</div>
